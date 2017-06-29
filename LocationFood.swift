@@ -11,7 +11,6 @@ import UIKit
 import CoreData
 import MapKit
 
-@objc(LocationFood)
 
 class LocationFood: NSManagedObject, MKAnnotation {
     
@@ -20,7 +19,7 @@ class LocationFood: NSManagedObject, MKAnnotation {
     }
     
     init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "pinFood", in: context)!
+        let entity = NSEntityDescription.entity(forEntityName: "LocationFood", in: context)!
         super.init(entity: entity, insertInto: context)
         self.latitude = coordinate.latitude as NSNumber?
         self.longitude = coordinate.longitude as NSNumber?

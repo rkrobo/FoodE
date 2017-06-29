@@ -9,12 +9,11 @@
 import Foundation
 import CoreData
 
-@objc(Photo)
-
-public class Photo: NSManagedObject {
+public class Photos: NSManagedObject {
     
     convenience init(annotUrl:String, locationPin:LocationFood, context: NSManagedObjectContext){
-        if let ent = NSEntityDescription.entity(forEntityName: "PhotoFood", in:context){
+        
+        if let ent = NSEntityDescription.entity(forEntityName: "Photos", in:context){
             
             self.init(entity:ent, insertInto: context)
             

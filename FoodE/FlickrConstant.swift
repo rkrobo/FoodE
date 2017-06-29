@@ -19,7 +19,7 @@ extension FlickrClient {
     }
     
     struct Methods {
-        static let SEARCH = "flickr.photos.getRecent"
+        static let SEARCH = "flickr.photos.search"
     }
     
     struct ParameterKeys {
@@ -34,7 +34,7 @@ extension FlickrClient {
         static let PER_PAGE         = "per_page"
         static let SORT             = "sort"
         static let ACCURACY         = "accuracy"
-        static let TAG              = "tag"
+        static let TEXT              = "text"
     }
     
     struct ParameterValues {

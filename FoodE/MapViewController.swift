@@ -62,7 +62,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
-        let reuseId = "pinFood"
+        let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
@@ -86,7 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         selectedPin = annotation
         
-        performSegue(withIdentifier: "CollectionViewSegue", sender: self)
+       performSegue(withIdentifier: "CollectionViewSegue", sender: self)
         
     }
     
@@ -94,7 +94,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         mapView.deselectAnnotation(selectedPin as MKAnnotation?, animated: false)
         let controller = segue.destination as! LocationImagesViewController
@@ -108,7 +108,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let center = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.region = region
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+       // print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    
+    @IBAction func performSegueToReturnBack()  {
+        if let nav = self.navigationController {
+            nav.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-extension Photo {
+extension Photos {
 
     @NSManaged var url: String?
     @NSManaged var imageData: NSData?

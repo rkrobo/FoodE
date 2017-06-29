@@ -12,5 +12,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImage: UIImageView!
     
+    override func prepareForReuse() {
+        cellImage.backgroundColor = UIColor.black
+    }
     
 }

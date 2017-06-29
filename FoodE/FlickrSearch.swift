@@ -26,15 +26,68 @@ extension FlickrClient {
             ParameterKeys.PER_PAGE: 21,
             ParameterKeys.SORT: sort,
             ParameterKeys.ACCURACY: 16,
-            ParameterKeys.TAG: "restaurant"
+            ParameterKeys.TEXT: "restaurant+food"
             ] as [String : Any]
+        
+        
+        taskForGETMethod(nil, parameters: parameters as [String : AnyObject]?, parseJSON: true) { (JSONResult, error) in
+            
+            guard  error == nil else{
+                
+                completionHandler(false, "there was an error in the request")
+                return
+                
+            }
+            if let photosDictionary = JSONResult?.value(forKey: "photos") as? [String: AnyObject],
+                
+                let photosArray = photosDictionary["photo"] as? [[String: AnyObject]],
+                
+                let numofPages = photosDictionary["pages"] as? Int {
+                
+                if(photosArray.count == 0 ){
+                    print("There are no photos for this location")
+                    return
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    pin.locationPages = numofPages as NSNumber?
+                    
+                    for photoDictionary in photosArray {
+                        
+                        guard let photoURLString = photoDictionary["url_m"] else{
+                            return
+                        }
+                        
+                        let photo = Photos(annotUrl: photoURLString as! String, locationPin: pin, context: self.sharedContext)
+                        
+                        self.downloadImageForPhoto(photo) { (success, errorString) in
+                            if success {
+                                DispatchQueue.main.async(execute: {
+                                    CoreDataStack.sharedInstance().save()
+                                    completionHandler(true, nil)
+                                })
+                            } else {
+                                DispatchQueue.main.async(execute: {
+                                    completionHandler(false, errorString)
+                                })
+                            }
+                        }
+                    }
+                })
+            }
+            else {
+                completionHandler(false, "Unable to download Photos for the location")
+            }
+        }
+
         
     }
    
     func randomPhotos(_ pin:LocationFood) -> String {
         
         if let numPages = pin.locationPages {
-            var numPagesInt = numPages as Int
+            var numPagesInt = numPages as! Int
             if numPagesInt > 200 {
                 numPagesInt = 200
             }
@@ -52,7 +105,7 @@ extension FlickrClient {
     }
     
     
-    /*func downloadImageForPhoto(_ photo: Photo, completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+    func downloadImageForPhoto(_ photo: Photos, completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         taskForGETMethod(photo.url, parameters: nil, parseJSON: false) { (result, error) in
             
@@ -61,6 +114,7 @@ extension FlickrClient {
                 completionHandler(false, "Unable to download Photo")
             } else {
                 if let result = result {
+                    
                     DispatchQueue.main.async(execute: {
                         
                         photo.imageData =  result as? NSData
@@ -72,7 +126,7 @@ extension FlickrClient {
                 }
             }
         }
-    }*/
+    }
     
     func createBoundingBoxString(_ pin: LocationFood) -> String {
         

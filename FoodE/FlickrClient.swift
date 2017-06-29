@@ -24,7 +24,7 @@ class FlickrClient: NSObject {
         session = URLSession.shared
     }
     
-    func taskForGETMethod(_ url: String?, parameters: [String : AnyObject]?, parseJSON: Bool, completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForGETMethod(_ url: String?, parameters: [String : AnyObject]?, parseJSON: Bool, completionHandler: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
         var urlString = (url != nil) ? url : Constants.BASE_URL
         
@@ -81,8 +81,6 @@ class FlickrClient: NSObject {
         
         /* 7. Start the request */
         task.resume()
-        
-        return task
     }
     
     // MARK: Helper Methods
