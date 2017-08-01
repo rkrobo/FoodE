@@ -12,14 +12,17 @@ import Foundation
 
 class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate{
     
-    var searchesArray = [UserPhotos]()
     
     var searchTerm : String = ""
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var downloadIndicator: UIActivityIndicatorView!
     
     var error: NSError?
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     var itemsPerRow: CGFloat = 3
     var sectionInsets = UIEdgeInsets(top: 6.0, left: 5.3, bottom: 6.0, right: 5.3)
@@ -29,17 +32,11 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     var updatedIndexPaths : [IndexPath]!
     
     @IBOutlet weak var searchTextHeader: UILabel!
+    
+    @IBOutlet weak var noPhotos: UILabel!
+    
+    var fetchRequest = NSFetchedResultsController<NSFetchRequestResult>()
    
-    
-    lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserPhotos")
-        let sortDescriptor = NSSortDescriptor(key: "restaurantName", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultsController.delegate = self
-        return fetchedResultsController
-    }()
-    
 
     override func viewDidLoad() {
         
@@ -47,33 +44,70 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         searchBar.delegate = self
         
-        if(error != nil || fetchedResultsController.fetchedObjects?.count == 0 ) {
-            
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-            label.center = CGPoint(x: 180, y: 285)
-            label.textAlignment = .center
-            label.text = "No Photos Stored"
-            self.view.addSubview(label)
-        }
+        self.downloadIndicator.isHidden = true
+        
+        loadCollection()
         
     }
     
-    func fetchRequest(){
+    
+    func fetchRestuarants() -> NSFetchedResultsController<NSFetchRequestResult>{
+        
+        downloadIndicator.isHidden = false
+        
+        downloadIndicator.startAnimating()
+        
+        let fetchedRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserPhotos")
+        
+        let sortDescriptor = NSSortDescriptor(key: "restaurantName", ascending: true)
+        fetchedRequest.sortDescriptors = [sortDescriptor]
+       if(searchTerm != ""){
+            fetchedRequest.predicate = NSPredicate(format: "restaurantName == %@", searchTerm)
+        }
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchedRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+        
+    }
+    
+    
+    func loadCollection() {
+        
+        
+        fetchRequest = fetchRestuarants()
+        
         
         do {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserPhotos")
-            let sortDescriptor = NSSortDescriptor(key: "restaurantName", ascending: true)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            try  searchesArray = self.sharedContext.fetch(fetchRequest) as! [UserPhotos]
-            print("Searches: ", searchesArray)
             
-        } catch let error1 as NSError {
+            try fetchRequest.performFetch()
+            
+            if(error == nil || fetchRequest.fetchedObjects?.count != 0) {
+                
+                noPhotos.isHidden = true
+            }
+            
+        }
+            
+        catch let error1 as NSError {
             error = error1
+            
+            let alert = UIAlertController(title: "Error Message", message: error as? String, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+         
             print(error ?? 0)
         }
         
+        downloadIndicator.stopAnimating()
+        
+        self.downloadIndicator.isHidden = true
+        
+        collectionView.reloadData()
+        
     }
-    
     
     
     @IBAction func doneAction(_ sender: Any) {
@@ -82,18 +116,9 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     }
     
     
-    func loadCollection() {
-        
-        
-        self.collectionView.reloadData()
-        
-        
-
-    }
-    
   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController.sections {
+        if let sections = fetchRequest.sections {
             let currentSection = sections[section]
             return currentSection.numberOfObjects
         }
@@ -106,7 +131,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         cell.imageCell.backgroundColor = UIColor.black
         
-        let photo = fetchedResultsController.object(at: indexPath) as! UserPhotos
+        let photo = fetchRequest.object(at: indexPath) as! UserPhotos
         
         DispatchQueue.main.async(execute: {
             if(photo.imageData != nil ){
@@ -119,7 +144,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if let sections = fetchedResultsController.sections {
+        if let sections = fetchRequest.sections {
             return sections.count
             
         }
@@ -129,7 +154,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let photo = fetchedResultsController.object(at: indexPath) as! UserPhotos
+        let photo = fetchRequest.object(at: indexPath) as! UserPhotos
         let alert = UIAlertController(title: "Delete Photo", message: "Do you want to delete this photo?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction) in
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -191,43 +216,28 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
     }
     
-  /*  func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: "sectionHeader",
-                                                                         for: indexPath) as! HeaderCollectionReusableView
-
-       headerView.headerText.text = searchTerm
-        
-       headerView.setNeedsDisplay()
-        
-        
-        
-        return headerView
-        
-    }*/
-    
-  /*  func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize{
-        
-            return CGSize(0,50)
-    }*/
-    
     var sharedContext: NSManagedObjectContext {
         return CoreDataStack.sharedInstance().managedObjectContext!
     }
     
-    @IBAction func performSegueToReturnBack()  {
-        if let nav = self.navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+    @IBAction func clearAction(_ sender: Any) {
+        
+        searchTextHeader.text = ""
+        
+        searchTerm = ""
+        
+        searchBar.text = ""
+        
+        loadCollection()
     }
     
+    @IBAction func performSegueToReturnBack()  {
+        
+        navigationController?.popViewController(animated: true)
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
 }
     extension MyPhotoCollectionViewController : UICollectionViewDelegateFlowLayout {
         

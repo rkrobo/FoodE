@@ -21,12 +21,29 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     var sessionOutputSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecJPEG]);
     var previewLayer = AVCaptureVideoPreviewLayer();
     
+    var cameraAvaliable = Bool()
+    
+    @IBOutlet weak var cameraButton: UIButton!
+   
     var photo = NSData()
     
     
     override func viewDidLoad() {
        
         super.viewDidLoad()
+        
+            if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
+                
+                cameraAvaliable = false
+                
+                cameraButton.isEnabled = false
+                
+                let alert = UIAlertController(title: "Alert", message: "No camera detected. Capture button has been disabled", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+        }
+        
    
     }
     
@@ -106,7 +123,16 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     @IBAction func savePhoto(_ sender: Any) {
         
+         if cameraAvaliable == false {
+            
+            navigationController?.popViewController(animated: true)
+            
+            dismiss(animated: true, completion: nil)
+
+        }
         
+         else {
+    
            let userPhoto = UserPhotos(context: self.sharedContext)
             
             userPhoto.imageData = photo
@@ -118,6 +144,8 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             navigationController?.popViewController(animated: true)
         
             dismiss(animated: true, completion: nil)
+            
+        }
     }
     
     

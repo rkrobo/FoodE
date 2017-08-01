@@ -16,4 +16,5 @@ extension LocationFood {
     @NSManaged var latitude: NSNumber?
     @NSManaged var longitude: NSNumber?
     @NSManaged var locationPages: NSNumber?
+    @NSManaged var placeID: NSString?
 }

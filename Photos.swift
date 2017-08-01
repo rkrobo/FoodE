@@ -11,7 +11,7 @@ import CoreData
 
 public class Photos: NSManagedObject {
     
-    convenience init(annotUrl:String, locationPin:LocationFood, context: NSManagedObjectContext){
+    convenience init(annotUrl:String? = "", locationPin:LocationFood, context: NSManagedObjectContext){
         
         if let ent = NSEntityDescription.entity(forEntityName: "Photos", in:context){
             

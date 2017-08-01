@@ -18,6 +18,8 @@
 		A41E19651E9A15B000C23119 /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E19641E9A15B000C23119 /* FlickrClient.swift */; };
 		A4365D9D1ECA8D0F0045ECFF /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = A498916B1E7E6048003270C3 /* Assets.xcassets */; };
 		A4365DA01ECA8D370045ECFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4365D9E1ECA8D370045ECFF /* Main.storyboard */; };
+		A43792901F308A7E00324729 /* UserRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A437928E1F308A7E00324729 /* UserRegion.swift */; };
+		A43792911F308A7E00324729 /* UserRegion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A437928F1F308A7E00324729 /* UserRegion+CoreDataProperties.swift */; };
 		A438FC711ED4DCF10016BD43 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A438FC701ED4DCF10016BD43 /* HeaderCollectionReusableView.swift */; };
 		A4524D611E89DA650020F592 /* LocationImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4524D601E89DA650020F592 /* LocationImagesViewController.swift */; };
 		A4633D8F1EEA169100F4D310 /* FlickrSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4633D8E1EEA169100F4D310 /* FlickrSearchResults.swift */; };
@@ -33,6 +35,7 @@
 		A4DAC2A81EBA3CA900AD7DED /* MyPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DAC2A71EBA3CA900AD7DED /* MyPhotoCollectionViewCell.swift */; };
 		A4EFFF801E9B051B00DE94E3 /* FlickrConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EFFF7F1E9B051B00DE94E3 /* FlickrConstant.swift */; };
 		A4EFFF821E9B266300DE94E3 /* FlickrSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EFFF811E9B266300DE94E3 /* FlickrSearch.swift */; };
+		E6F1E810257E36A0A5DE752A /* libPods-FoodE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D17C0057730AFD653A188AB5 /* libPods-FoodE.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57F5E48405BBB0C2ACE0CEBC /* Pods-FoodE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodE.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoodE/Pods-FoodE.release.xcconfig"; sourceTree = "<group>"; };
+		625B472AEF3F11B54C0AE30D /* Pods-FoodE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodE/Pods-FoodE.debug.xcconfig"; sourceTree = "<group>"; };
 		A40F5F861E9CB39E005621B9 /* Photos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		A40F5F871E9CB39E005621B9 /* Photos+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photos+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A41058161EB25C79006575E6 /* MyPhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoCollectionViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +61,8 @@
 		A41DC2021E8DC06500A9523C /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		A41E19641E9A15B000C23119 /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 		A4365D9F1ECA8D370045ECFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A437928E1F308A7E00324729 /* UserRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegion.swift; sourceTree = "<group>"; };
+		A437928F1F308A7E00324729 /* UserRegion+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserRegion+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A438FC701ED4DCF10016BD43 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		A4524D601E89DA650020F592 /* LocationImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationImagesViewController.swift; sourceTree = "<group>"; };
 		A4633D8E1EEA169100F4D310 /* FlickrSearchResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrSearchResults.swift; sourceTree = "<group>"; };
@@ -75,6 +82,7 @@
 		A4DAC2A71EBA3CA900AD7DED /* MyPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4EFFF7F1E9B051B00DE94E3 /* FlickrConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConstant.swift; sourceTree = "<group>"; };
 		A4EFFF811E9B266300DE94E3 /* FlickrSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrSearch.swift; sourceTree = "<group>"; };
+		D17C0057730AFD653A188AB5 /* libPods-FoodE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodE.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6F1E810257E36A0A5DE752A /* libPods-FoodE.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,9 +104,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06FD3B685C396E5847375035 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				625B472AEF3F11B54C0AE30D /* Pods-FoodE.debug.xcconfig */,
+				57F5E48405BBB0C2ACE0CEBC /* Pods-FoodE.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A49891581E7E6048003270C3 = {
 			isa = PBXGroup;
 			children = (
+				A437928E1F308A7E00324729 /* UserRegion.swift */,
+				A437928F1F308A7E00324729 /* UserRegion+CoreDataProperties.swift */,
 				A413B31E1EB61C800071A7BF /* UserPhotos.swift */,
 				A413B31F1EB61C800071A7BF /* UserPhotos+CoreDataProperties.swift */,
 				A40F5F861E9CB39E005621B9 /* Photos.swift */,
@@ -108,6 +128,8 @@
 				A49891631E7E6048003270C3 /* FoodE */,
 				A49891781E7E6048003270C3 /* FoodETests */,
 				A49891621E7E6048003270C3 /* Products */,
+				06FD3B685C396E5847375035 /* Pods */,
+				AA14DF4C7556D1605B0C4279 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +176,14 @@
 			path = FoodETests;
 			sourceTree = "<group>";
 		};
+		AA14DF4C7556D1605B0C4279 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D17C0057730AFD653A188AB5 /* libPods-FoodE.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A498917E1E7E6048003270C3 /* Build configuration list for PBXNativeTarget "FoodE" */;
 			buildPhases = (
+				12824D145526DFD2EC0191D4 /* [CP] Check Pods Manifest.lock */,
 				A498915D1E7E6048003270C3 /* Sources */,
 				A498915E1E7E6048003270C3 /* Frameworks */,
 				A498915F1E7E6048003270C3 /* Resources */,
+				5708FA0E57E70115B7AF7827 /* [CP] Embed Pods Frameworks */,
+				BE739CB3F78691A0396EB23A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,11 +286,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		12824D145526DFD2EC0191D4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5708FA0E57E70115B7AF7827 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FoodE/Pods-FoodE-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE739CB3F78691A0396EB23A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FoodE/Pods-FoodE-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A498915D1E7E6048003270C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A43792901F308A7E00324729 /* UserRegion.swift in Sources */,
+				A43792911F308A7E00324729 /* UserRegion+CoreDataProperties.swift in Sources */,
 				A4365D9D1ECA8D0F0045ECFF /* Assets.xcassets in Sources */,
 				A4C025131E8DD89D009AF88C /* Model.xcdatamodeld in Sources */,
 				A40F5F891E9CB39E005621B9 /* Photos+CoreDataProperties.swift in Sources */,
@@ -416,9 +499,11 @@
 		};
 		A498917F1E7E6048003270C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 625B472AEF3F11B54C0AE30D /* Pods-FoodE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6CHMHRZB23;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = FoodE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = simplyrola.com.FoodE;
@@ -429,9 +514,11 @@
 		};
 		A49891801E7E6048003270C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57F5E48405BBB0C2ACE0CEBC /* Pods-FoodE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6CHMHRZB23;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = FoodE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = simplyrola.com.FoodE;

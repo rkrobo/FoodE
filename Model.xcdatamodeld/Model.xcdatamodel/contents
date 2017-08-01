@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="LocationFood" representedClassName=".LocationFood" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="locationPages" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="placeID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photo" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photos" inverseName="locationFood" inverseEntity="Photos" syncable="YES"/>
     </entity>
     <entity name="Photos" representedClassName=".Photos" syncable="YES">
@@ -15,9 +16,16 @@
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="restaurantName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="UserRegion" representedClassName=".UserRegion" syncable="YES">
+        <attribute name="cLat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cLong" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sLat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sLong" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="LocationFood" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="LocationFood" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Photos" positionX="-63" positionY="0" width="128" height="90"/>
         <element name="UserPhotos" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="UserRegion" positionX="-54" positionY="27" width="128" height="105"/>
     </elements>
 </model>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W1p-bn-tZy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W1p-bn-tZy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -141,21 +141,39 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gUw-7s-gOp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mty-hy-in6">
+                                <rect key="frame" x="230" y="557" width="139" height="30"/>
+                                <color key="backgroundColor" red="0.93513196243523322" green="0.93513196243523322" blue="0.93513196243523322" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="139" id="TJT-qQ-JHM"/>
+                                </constraints>
+                                <state key="normal" title="Google Places"/>
+                                <connections>
+                                    <action selector="googlePlaces:" destination="4Dy-Rn-zSv" eventType="touchUpInside" id="yyT-Am-CyY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gUw-7s-gOp" firstAttribute="leading" secondItem="g0O-Ob-kAh" secondAttribute="leading" id="KSz-JW-B6S"/>
+                            <constraint firstItem="gUw-7s-gOp" firstAttribute="bottom" secondItem="8cA-ad-NZG" secondAttribute="top" id="YXl-qX-5kC"/>
                             <constraint firstAttribute="trailing" secondItem="gUw-7s-gOp" secondAttribute="trailing" id="cGt-Gd-g3u"/>
-                            <constraint firstItem="8cA-ad-NZG" firstAttribute="top" secondItem="gUw-7s-gOp" secondAttribute="bottom" id="qSG-cE-ayj"/>
+                            <constraint firstItem="8cA-ad-NZG" firstAttribute="top" secondItem="mty-hy-in6" secondAttribute="bottom" constant="80" id="siW-AT-YdA"/>
                             <constraint firstItem="gUw-7s-gOp" firstAttribute="top" secondItem="T0H-nC-BLy" secondAttribute="bottom" id="tgp-ED-E4o"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mty-hy-in6" secondAttribute="trailing" constant="-10" id="wqs-yk-1BT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YsB-jf-ap7">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="dYd-6i-fvt">
+                            <connections>
+                                <action selector="edit:" destination="4Dy-Rn-zSv" id="tOi-nJ-Mtp"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Spd-bu-RmS">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="npm-UL-Mqv">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="LogOut"/>
+                                <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="performSegueToReturnBack" destination="4Dy-Rn-zSv" eventType="touchUpInside" id="6SW-RI-5KA"/>
                                 </connections>
@@ -163,13 +181,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="dYd-6i-fvt" id="asS-Pl-zPS"/>
                         <outlet property="mapView" destination="gUw-7s-gOp" id="PPz-So-wT9"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="CollectionViewSegue" id="Qpq-Y7-4i0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khf-53-ZnQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303" y="46"/>
+            <point key="canvasLocation" x="1301.5999999999999" y="45.42728635682159"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CO6-u9-5Lr">
@@ -281,8 +300,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Photos Stored" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIX-5U-PQd">
+                                        <rect key="frame" x="0.0" y="86" width="375" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="ZiG-pX-INB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mbr-zt-vSP">
-                                        <rect key="frame" x="0.0" y="86" width="375" height="511"/>
+                                        <rect key="frame" x="0.0" y="106" width="375" height="491"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gyp-kB-ZKV">
                                             <size key="itemSize" width="193" height="176"/>
@@ -290,6 +318,10 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
+                                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="SLF-Sv-t3x">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="491"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCollectionCell" id="bGA-Ws-FXa" customClass="MyPhotoCollectionViewCell" customModule="FoodE" customModuleProvider="target">
                                                 <rect key="frame" x="91" y="0.0" width="193" height="176"/>
@@ -343,6 +375,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DG1-Tb-71p">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="kzH-hi-rY8">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="M3P-jZ-6X2">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clearAction:" destination="hQG-rP-Dbb" eventType="touchUpInside" id="FRk-uQ-qXJ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Q2t-zd-OKM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zib-Yc-LsM">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
@@ -356,7 +398,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="mbr-zt-vSP" id="JZb-Jz-bn7"/>
-                        <outlet property="searchBar" destination="avq-3b-cxN" id="qK4-JA-zjF"/>
+                        <outlet property="downloadIndicator" destination="SLF-Sv-t3x" id="IAH-6h-dlo"/>
+                        <outlet property="noPhotos" destination="SIX-5U-PQd" id="Hgq-0L-dI0"/>
+                        <outlet property="searchBar" destination="avq-3b-cxN" id="L3X-j4-yrg"/>
                         <outlet property="searchTextHeader" destination="kSk-4r-ttI" id="hYo-tt-gTg"/>
                     </connections>
                 </viewController>
@@ -443,7 +487,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SeW-K8-wzN">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
+                                <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="savePhoto:" destination="iR4-FV-DWS" eventType="touchUpInside" id="R3u-vh-mC9"/>
                                 </connections>
@@ -451,6 +495,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraButton" destination="Pfs-bR-TyP" id="EzQ-UX-NBr"/>
                         <outlet property="livePhotoView" destination="Aob-vz-lom" id="GSF-Pv-4Nl"/>
                         <outlet property="photoPreview" destination="umX-Hb-2AQ" id="EWA-2B-wrv"/>
                         <outlet property="restaurantInput" destination="v2j-7f-UHF" id="A0Z-px-sdE"/>
@@ -483,7 +528,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SQg-zr-Dco" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uRv-7Q-I1k">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uRv-7Q-I1k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -501,7 +546,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ICE-xf-zlk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LG8-sd-yLh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LG8-sd-yLh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

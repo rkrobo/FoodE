@@ -18,11 +18,12 @@ class LocationFood: NSManagedObject, MKAnnotation {
         super.init(entity: entity, insertInto: context)
     }
     
-    init(coordinate: CLLocationCoordinate2D, context: NSManagedObjectContext) {
+    init(coordinate : CLLocationCoordinate2D , placeID: NSString? = "", context: NSManagedObjectContext) {
         let entity = NSEntityDescription.entity(forEntityName: "LocationFood", in: context)!
         super.init(entity: entity, insertInto: context)
         self.latitude = coordinate.latitude as NSNumber?
         self.longitude = coordinate.longitude as NSNumber?
+        self.placeID = placeID
     }
     
     var coordinate: CLLocationCoordinate2D {

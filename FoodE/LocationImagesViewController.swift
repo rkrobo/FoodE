@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 import Foundation
+import GooglePlaces
 
 class LocationImagesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate{
 
@@ -41,15 +42,26 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
   
         let span = MKCoordinateSpanMake(0.5, 0.5)
         
+        
         let region =  MKCoordinateRegion(center: pin.coordinate, span: span)
         
+        
         mapView.setRegion(region, animated: true)
+ 
         
         var error: NSError?
         do {
+            
             try fetchedResultsController.performFetch()
+        
         } catch let error1 as NSError {
+           
             error = error1
+           
+            let alert = UIAlertController(title: "Error Message", message: error as? String, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
             print(error ?? 0)
         }
         
@@ -74,6 +86,16 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
         downloadIndicator.isHidden = false
         
         downloadIndicator.startAnimating()
+        
+        if(pin.placeID != ""){
+            
+            loadFirstPhotoForPlace(placeID: pin.placeID! as String)
+            CoreDataStack.sharedInstance().save()
+            downloadIndicator.stopAnimating()
+            downloadIndicator.isHidden = true
+        }
+        
+        else {
             
         FlickrClient.sharedInstance.getPhotosForPin(pin) { (success, errorString) in
             
@@ -82,11 +104,43 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
             completionHandler(success, errorString)
             
         }
+            
+        }
+    }
+    
+    func loadFirstPhotoForPlace(placeID: String) {
+    
+         GMSPlacesClient.shared().lookUpPhotos(forPlaceID: placeID) { (photos, error) -> Void in
+            if let error = error {
+                // TODO: handle the error.
+                print("Error: \(error.localizedDescription)")
+            } else {
+            
+                for searchPhoto in (photos?.results)!{
+                    self.loadImageForMetadata(photoMetadata: searchPhoto)
+                }
+            }
+        }
+    }
+    
+    func loadImageForMetadata(photoMetadata: GMSPlacePhotoMetadata) {
+         GMSPlacesClient.shared().loadPlacePhoto(photoMetadata, callback: {
+            (photo, error) -> Void in
+            if let error = error {
+                // TODO: handle the error.
+                print("Error: \(error.localizedDescription)")
+            } else {
+            
+               DispatchQueue.main.async(execute: {
+                let photoImage = Photos(locationPin: self.pin, context: self.sharedContext)
+                 photoImage.imageData = UIImagePNGRepresentation(photo!) as NSData?
+                })
+            }
+        })
     }
     
     
     func loadCollection(){
-        
         
         for photo in fetchedResultsController.fetchedObjects as! [Photos] {
             sharedContext.delete(photo)
@@ -97,6 +151,11 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
            self.pinFinishedDownload()
             
             if success == false {
+            
+                let alert = UIAlertController(title: "Alert", message: "An error occured, success is false", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
                 print("An error occurred, success is false")
                 return
             }
@@ -132,10 +191,12 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
+        
         cell.cellImage.backgroundColor = UIColor.black
         
         let photo = fetchedResultsController.object(at: indexPath) as! Photos
-   
+        
+        
         DispatchQueue.main.async(execute: {
             
             if(photo.imageData != nil ){
