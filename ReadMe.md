@@ -15,17 +15,26 @@ Xcode Version v8
 Swift 3
 ```
 
+
 ### Installing
 
 A step by step series of examples that tell you have to get a development env running
 
 Install Xcode with Swift 3.0
 
-Search through the FoodE folder directory for FoodE.xcodeproj
+Search through the FoodE folder directory for FoodE.xcworkspace
 
 Open the file in Xcode
 
 Run the program through Xcode on an IOS device
+
+
+### Functionality
+
+MapView and LocationImageView displays a map that allows users to drop a pin and displays pictures of food around that location 
+
+PhotoView - displays a camera view
+MyPhotoCollectionViewController - displays the pictures that the users have taken
 
 ## Known Issues
 

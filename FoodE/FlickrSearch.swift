@@ -26,7 +26,7 @@ extension FlickrClient {
             ParameterKeys.PER_PAGE: 21,
             ParameterKeys.SORT: sort,
             ParameterKeys.ACCURACY: 16,
-            ParameterKeys.TEXT: "restaurant+food"
+            ParameterKeys.TAGS:"Restaurant, restaurant,restaurants,Restaurants,restaurantFood,RestaurantFood,food,Foods,food,Food",
             ] as [String : Any]
         
         

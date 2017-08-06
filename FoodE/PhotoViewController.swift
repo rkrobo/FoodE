@@ -32,6 +32,8 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
        
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
             if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
                 
                 cameraAvaliable = false

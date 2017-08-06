@@ -15,6 +15,7 @@ import GooglePlacePicker
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicatior: UIActivityIndicatorView!
     
     var placesClient: GMSPlacesClient!
     
@@ -26,9 +27,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var userLocation : CLLocation!
     
-    let locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     
-    var editMode = false;
+    var editMode = false
     
    
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -37,6 +38,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        activityIndicatior.stopAnimating();
+        
+        activityIndicatior.isHidden = true;
         // Do any additional setup after loading the view, typically from a nib.
         
         placesClient = GMSPlacesClient.shared()
@@ -51,8 +56,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
+            
         }
         
+            locationManager.stopUpdatingLocation()
+    
 
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.addAnnotation(_:)))
         
@@ -65,6 +73,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.addAnnotations(fetchAllPins())
         
         mapView.delegate = self
+        
+        self.hideKeyboardWhenTappedAround()
+    }
+    
+    
+    @IBAction func currentUserLocation(_ sender: Any) {
+        
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
+            
+        
     }
     
 
@@ -108,7 +129,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func googlePlaces(_ sender: Any) {
         
-        pickPlace();
+        if(InternetConnectivity.isConnectedToNetwork()==false ){
+            
+            activityIndicatior.isHidden = true;
+            
+            let alert = UIAlertController(title: "Error Message", message: "No Internet Connection. Google Places cant be used at this time", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+                
+                alert.dismiss(animated: true, completion: nil)
+                
+            }))
+            
+            present(alert, animated: true, completion: nil)
+            
+            activityIndicatior.stopAnimating()
+            
+            activityIndicatior.isHidden = true
+        
+        }
+        
+        else {
+            
+            activityIndicatior.isHidden = false
+            
+            pickPlace();
+            
+        }
+        
     }
 
     
@@ -116,7 +164,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
         let reuseId = "pin"
+    
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+    
+        pinView?.isDraggable = true
         
         if pinView == nil {
             
@@ -132,6 +183,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return pinView
     }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        switch newState {
+        case .starting:
+            view.dragState = .dragging
+        case .ending, .canceling:
+            view.dragState = .none
+        default: break
+        }
+    }
     
     func deletePin(_ pin: LocationFood) {
         mapView.removeAnnotation(pin)
@@ -163,8 +223,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         else {
-        
-            performSegue(withIdentifier: "CollectionViewSegue", sender: self)
+            
+            if(InternetConnectivity.isConnectedToNetwork()==false ){
+                
+                let alert = UIAlertController(title: "Error Message", message: "No Internet Connection. Can't display photos", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+                    
+                    alert.dismiss(animated: true, completion: nil)
+                    
+                }))
+                
+                present(alert, animated: true, completion: nil)
+                
+                
+            }
+            
+            else {
+            
+                performSegue(withIdentifier: "CollectionViewSegue", sender: self)
+                
+            }
         }
         
     }
@@ -243,40 +322,50 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let center = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         mapView.region = region
-       // print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
     }
     
     func pickPlace() {
-       
-    if userLocation != nil {
-        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
-        let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001, longitude: center.longitude - 0.001)
-        let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
-        let config = GMSPlacePickerConfig(viewport: viewport)
-        let placePicker = GMSPlacePicker(config: config)
         
-        placePicker.pickPlace(callback: {(place, error) -> Void in
-            if let error = error {
-                print("Pick Place error: \(error.localizedDescription)")
-                return
-            }
+        activityIndicatior.startAnimating();
+       
+        if userLocation != nil {
+            let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
+            let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001, longitude: center.longitude - 0.001)
+            let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+            let config = GMSPlacePickerConfig(viewport: viewport)
+            let placePicker = GMSPlacePicker(config: config)
+            
+            
+        
+                placePicker.pickPlace(callback: {(place, error) -> Void in
+            
+
+                if let error = error {
+                    print("Pick Place error: \(error.localizedDescription)")
+                    return
+                }
+            
+        
             
             if let place = place {
-                
+        
                 let userPlace = LocationFood(coordinate: place.coordinate ,placeID: place.placeID as NSString, context: self.sharedContext)
                  self.selectedPin = userPlace
                  CoreDataStack.sharedInstance().save()
                  self.performSegue(withIdentifier: "CollectionViewSegue", sender: self)
             }
+            
+            self.activityIndicatior.stopAnimating();
+            
+            self.activityIndicatior.isHidden = true;
         })
             
-        }
-        
-        else {
             
-            print("error")
         }
+    
+            
     }
     
     
@@ -289,4 +378,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+
 

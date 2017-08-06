@@ -89,7 +89,7 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
         
         if(pin.placeID != ""){
             
-            loadFirstPhotoForPlace(placeID: pin.placeID! as String)
+            loadPhotosForPlace(placeID: pin.placeID! as String)
             CoreDataStack.sharedInstance().save()
             downloadIndicator.stopAnimating()
             downloadIndicator.isHidden = true
@@ -108,17 +108,23 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
         }
     }
     
-    func loadFirstPhotoForPlace(placeID: String) {
+    func loadPhotosForPlace(placeID: String) {
     
          GMSPlacesClient.shared().lookUpPhotos(forPlaceID: placeID) { (photos, error) -> Void in
             if let error = error {
                 // TODO: handle the error.
+                
                 print("Error: \(error.localizedDescription)")
-            } else {
+              
+            }
+            
+            else {
             
                 for searchPhoto in (photos?.results)!{
                     self.loadImageForMetadata(photoMetadata: searchPhoto)
                 }
+                
+                
             }
         }
     }
@@ -241,9 +247,7 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
 
         else {
             let foodPhoto = fetchedResultsController.object(at: indexPath) as! Photos
-            let imageController = self.storyboard!.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-            imageController.foodPhoto = foodPhoto
-            self.navigationController!.pushViewController(imageController, animated: true)
+            print(foodPhoto)
         }
     }
     

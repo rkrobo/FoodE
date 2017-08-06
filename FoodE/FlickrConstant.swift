@@ -34,7 +34,8 @@ extension FlickrClient {
         static let PER_PAGE         = "per_page"
         static let SORT             = "sort"
         static let ACCURACY         = "accuracy"
-        static let TEXT              = "text"
+        static let TAGS             = "tags"
+        static let TEXT             = "text"
     }
     
     struct ParameterValues {

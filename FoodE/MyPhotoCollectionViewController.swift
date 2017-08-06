@@ -44,7 +44,9 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         searchBar.delegate = self
         
-        self.downloadIndicator.isHidden = true
+        self.hideKeyboardWhenTappedAround()
+        
+        downloadIndicator.startAnimating()
         
         loadCollection()
         
@@ -61,7 +63,8 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         let sortDescriptor = NSSortDescriptor(key: "restaurantName", ascending: true)
         fetchedRequest.sortDescriptors = [sortDescriptor]
-       if(searchTerm != ""){
+       
+        if(searchTerm != ""){
             fetchedRequest.predicate = NSPredicate(format: "restaurantName == %@", searchTerm)
         }
         
@@ -83,11 +86,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         do {
             
             try fetchRequest.performFetch()
-            
-            if(error == nil || fetchRequest.fetchedObjects?.count != 0) {
-                
-                noPhotos.isHidden = true
-            }
+        
             
         }
             
@@ -99,6 +98,10 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
             self.present(alert, animated: true, completion: nil)
          
             print(error ?? 0)
+        }
+        
+        if(fetchRequest.fetchedObjects?.count != 0) {
+            noPhotos.isHidden = true
         }
         
         downloadIndicator.stopAnimating()
@@ -202,9 +205,6 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     }
     
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        //print("searchText \(searchText)")
-    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
