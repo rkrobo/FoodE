@@ -77,6 +77,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.hideKeyboardWhenTappedAround()
     }
     
+    func handleLongPress(sender:UILongPressGestureRecognizer) {
+        
+        if (sender.state == UIGestureRecognizerState.ended) {
+            print("Long press Ended");
+        } else if (sender.state == UIGestureRecognizerState.began) {
+            print("Long press detected.");
+        }
+    }
+    
     
     @IBAction func currentUserLocation(_ sender: Any) {
         

@@ -292,8 +292,8 @@ class LocationImagesViewController: UIViewController, UICollectionViewDelegate, 
     
     @IBAction func editPressed(_ sender: Any) {
         
-        edit = true
-        self.editButton.isEnabled = false
+        editButton.title = edit ? "Edit" : "Done"
+        edit = !edit
     }
     
     

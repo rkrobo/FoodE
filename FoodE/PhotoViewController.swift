@@ -20,25 +20,28 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     var sessionOutput = AVCapturePhotoOutput();
     var sessionOutputSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecJPEG]);
     var previewLayer = AVCaptureVideoPreviewLayer();
-    
-    var cameraAvaliable = Bool()
+
     
     @IBOutlet weak var cameraButton: UIButton!
    
     var photo = NSData()
     
+    var cameraAvaliable = true
+    
     
     override func viewDidLoad() {
        
+        
         super.viewDidLoad()
+    
         
         self.hideKeyboardWhenTappedAround()
         
             if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
                 
-                cameraAvaliable = false
-                
                 cameraButton.isEnabled = false
+                
+                cameraAvaliable = false
                 
                 let alert = UIAlertController(title: "Alert", message: "No camera detected. Capture button has been disabled", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
@@ -97,7 +100,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             sessionOutputSetting.previewPhotoFormat = [ kCVPixelBufferPixelFormatTypeKey as String : sessionOutputSetting.availablePreviewPhotoPixelFormatTypes.first!]
         }
         
-        sessionOutput.capturePhoto(with: sessionOutputSetting, delegate: self)
+       sessionOutput.capturePhoto(with: sessionOutputSetting, delegate: self)
         
     }
     
@@ -118,6 +121,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             photo = photoData! as NSData
             
             
+            
         }
 
     }
@@ -125,16 +129,17 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     @IBAction func savePhoto(_ sender: Any) {
         
-         if cameraAvaliable == false {
+        
+        if(cameraAvaliable == false ){
             
             navigationController?.popViewController(animated: true)
             
             dismiss(animated: true, completion: nil)
-
+            
         }
-        
-         else {
     
+        else {
+        
            let userPhoto = UserPhotos(context: self.sharedContext)
             
             userPhoto.imageData = photo
@@ -148,6 +153,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             dismiss(animated: true, completion: nil)
             
         }
+        
     }
     
     
