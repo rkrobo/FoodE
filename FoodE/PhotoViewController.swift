@@ -24,7 +24,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     @IBOutlet weak var cameraButton: UIButton!
    
-    var photo = NSData()
+    var photo: NSData?
     
     var cameraAvaliable = true
     
@@ -146,6 +146,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     
     @IBAction func cameraCapture(_ sender: Any) {
+        
         sessionOutput.isHighResolutionCaptureEnabled = true
         sessionOutputSetting.isHighResolutionPhotoEnabled = true
         sessionOutputSetting.isAutoStillImageStabilizationEnabled = true
@@ -154,7 +155,9 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             sessionOutputSetting.previewPhotoFormat = [ kCVPixelBufferPixelFormatTypeKey as String : sessionOutputSetting.availablePreviewPhotoPixelFormatTypes.first!]
         }
         
-       sessionOutput.capturePhoto(with: sessionOutputSetting, delegate: self)
+        let uniqueSettings = AVCapturePhotoSettings.init(from: sessionOutputSetting)
+        
+        sessionOutput.capturePhoto(with: uniqueSettings, delegate: self)
         
     }
     
@@ -184,7 +187,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     @IBAction func savePhoto(_ sender: Any) {
         
         
-        if(cameraAvaliable == false ){
+        if(!cameraAvaliable){
             
             navigationController?.popViewController(animated: true)
             
@@ -192,9 +195,12 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             
         }
             
-        else if ((photo == nil)||(textField == nil )){
+        else if ((photo == nil)||(textField.text == "" )){
             
-            print("No Photo or textField")
+            let alert = UIAlertController(title: "Alert", message: "No Photo or Restaurant Name was entered. Please enter the restaurant name first and retake the photo. ", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
             
             navigationController?.popViewController(animated: true)
             
@@ -218,8 +224,6 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
         }
         
     }
-    
-    
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStack.sharedInstance().managedObjectContext!

@@ -12,4 +12,6 @@ class MyPhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageCell: UIImageView!
     
+    @IBOutlet weak var restaurantNameLabel: UILabel!
+    
 }

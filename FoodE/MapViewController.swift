@@ -56,10 +56,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            
         }
         
-            locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
+
     
 
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.addAnnotation(_:)))
@@ -77,10 +77,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.hideKeyboardWhenTappedAround()
     }
     
-    func handleLongPress(sender:UILongPressGestureRecognizer) {
-        
-    
-    }
     
     
     @IBAction func currentUserLocation(_ sender: Any) {
@@ -141,9 +137,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func googlePlaces(_ sender: Any) {
         
-        if(InternetConnectivity.isConnectedToNetwork()==false ){
+        if (!InternetConnectivity.isConnectedToNetwork()){
             
-            activityIndicatior.isHidden = true;
+            activityIndicatior.isHidden = true
             
             let alert = UIAlertController(title: "Error Message", message: "No Internet Connection. Google Places cant be used at this time", preferredStyle: .alert)
             
@@ -162,7 +158,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         else {
-            
+        
             activityIndicatior.isHidden = false
             
             pickPlace();
@@ -329,7 +325,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations[0]
+        userLocation = locations.last!
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         let center = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
@@ -340,6 +336,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func pickPlace() {
         
         activityIndicatior.startAnimating();
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
        
         if userLocation != nil {
             let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
@@ -349,8 +349,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let config = GMSPlacePickerConfig(viewport: viewport)
             let placePicker = GMSPlacePicker(config: config)
             
-            
-        
                 placePicker.pickPlace(callback: {(place, error) -> Void in
             
 
@@ -358,8 +356,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     print("Pick Place error: \(error.localizedDescription)")
                     return
                 }
-            
-        
             
             if let place = place {
         
@@ -369,14 +365,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                  self.performSegue(withIdentifier: "CollectionViewSegue", sender: self)
             }
             
-            self.activityIndicatior.stopAnimating();
-            
-            self.activityIndicatior.isHidden = true;
+         
         })
             
             
-        }
-    
+       }
+      
+           self.activityIndicatior.stopAnimating();
+            
+            self.activityIndicatior.isHidden = true;
             
     }
     

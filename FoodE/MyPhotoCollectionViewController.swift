@@ -12,7 +12,6 @@ import Foundation
 
 class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate{
     
-    
     var searchTerm : String = ""
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -23,6 +22,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     var itemsPerRow: CGFloat = 3
     var sectionInsets = UIEdgeInsets(top: 6.0, left: 5.3, bottom: 6.0, right: 5.3)
@@ -36,6 +36,8 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var noPhotos: UILabel!
     
     var fetchRequest = NSFetchedResultsController<NSFetchRequestResult>()
+    
+    var editMode = false
    
 
     override func viewDidLoad() {
@@ -139,6 +141,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         DispatchQueue.main.async(execute: {
             if(photo.imageData != nil ){
                 cell.imageCell.image = UIImage(data: photo.imageData! as Data)
+                cell.restaurantNameLabel.text = photo.restaurantName
             }
         })
         
@@ -155,35 +158,42 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         return 0
     }
     
-    /*func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let photo = fetchRequest.object(at: indexPath) as! UserPhotos
-        let alert = UIAlertController(title: "Delete Photo", message: "Do you want to delete this photo?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction) in
-            collectionView.deselectItem(at: indexPath, animated: true)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
-            collectionView.deselectItem(at: indexPath, animated: true)
-            self.sharedContext.delete(photo)
-            CoreDataStack.sharedInstance().save()
-        }))
-        present(alert, animated: true, completion: nil)
-    }*/
     
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    
+        if(editMode == true) {
+            
+            let photo = fetchRequest.object(at: indexPath) as! UserPhotos
+            let alert = UIAlertController(title: "Delete Photo", message: "Do you want to delete this photo?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction) in
+                collectionView.deselectItem(at: indexPath, animated: true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+                collectionView.deselectItem(at: indexPath, animated: true)
+                self.sharedContext.delete(photo)
+                CoreDataStack.sharedInstance().save()
+            }))
+            present(alert, animated: true, completion: nil)
         
-        let photoController = self.storyboard!.instantiateViewController(withIdentifier: "MyPhoto") as! MyPhoto
-    
-    let photo = fetchRequest.object(at: indexPath as IndexPath) as! UserPhotos
-    
-    DispatchQueue.main.async(execute: {
-        if(photo.imageData != nil ){
-            photoController.image = UIImage(data: photo.imageData! as Data)!
         }
-    })
     
-        self.navigationController!.pushViewController(photoController, animated: true)
+        else {
+        
+            let photoController = self.storyboard!.instantiateViewController(withIdentifier: "MyPhoto") as! MyPhoto
+    
+            let photo = fetchRequest.object(at: indexPath as IndexPath) as! UserPhotos
+    
+            DispatchQueue.main.async(execute: {
+                if(photo.imageData != nil ){
+                    photoController.image = UIImage(data: photo.imageData! as Data)!
+                }
+            })
+            
+            self.navigationController!.pushViewController(photoController, animated: true)
+            
+        }
         
     }
     
@@ -235,6 +245,15 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     var sharedContext: NSManagedObjectContext {
         return CoreDataStack.sharedInstance().managedObjectContext!
     }
+    
+    
+    @IBAction func editButton(_ sender: Any) {
+        
+        editButton.title = editMode ? "Edit" : "Done"
+        editMode = !editMode
+    }
+    
+    
     
     @IBAction func clearAction(_ sender: Any) {
         
