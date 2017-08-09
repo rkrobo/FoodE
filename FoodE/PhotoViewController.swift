@@ -186,7 +186,6 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     @IBAction func savePhoto(_ sender: Any) {
         
-        
         if(!cameraAvaliable){
             
             navigationController?.popViewController(animated: true)
