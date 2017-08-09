@@ -79,11 +79,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func handleLongPress(sender:UILongPressGestureRecognizer) {
         
-        if (sender.state == UIGestureRecognizerState.ended) {
-            print("Long press Ended");
-        } else if (sender.state == UIGestureRecognizerState.began) {
-            print("Long press detected.");
-        }
+    
     }
     
     
@@ -128,11 +124,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return
         }
         
-        let touchArea = gestureRecognizer.location(in: mapView)
-        let newCoordinates = mapView.convert(touchArea, toCoordinateFrom: mapView)
-        addedPin = LocationFood(coordinate: newCoordinates, context: sharedContext)
-        mapView.addAnnotation(addedPin!)
-        CoreDataStack.sharedInstance().save()
+        if (gestureRecognizer.state == UIGestureRecognizerState.began) {
+        
+            let touchArea = gestureRecognizer.location(in: mapView)
+        
+            let newCoordinates = mapView.convert(touchArea, toCoordinateFrom: mapView)
+        
+            addedPin = LocationFood(coordinate: newCoordinates, context: sharedContext)
+        
+            mapView.addAnnotation(addedPin!)
+       
+            CoreDataStack.sharedInstance().save()
+        }
     
     }
     

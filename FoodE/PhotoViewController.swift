@@ -28,15 +28,13 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     var cameraAvaliable = true
     
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
        
         
         super.viewDidLoad()
     
-        
-        self.hideKeyboardWhenTappedAround()
-        
             if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
                 
                 cameraButton.isEnabled = false
@@ -48,7 +46,6 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
                 self.present(alert, animated: true, completion: nil)
                 
         }
-        
    
     }
     
@@ -58,6 +55,8 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+         subscribeToKeyboardNotifications()
         
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
     
@@ -88,6 +87,61 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             }
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        
+        unsubscribeFromKeyboardNotifications()
+    }
+    
+    
+    func subscribeToKeyboardNotifications() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow), name: .UIKeyboardWillShow, object: nil)
+        
+      NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        
+        NotificationCenter.default.removeObserver(self, name:
+            
+            NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder();
+        
+        return true
+    }
+    
+    
+    func keyBoardWillShow(notification: NSNotification) {
+        
+        if(textField.isEditing){
+            
+            view.frame.origin.y =  getKeyboardHeight(notification: notification) * -1
+        }
+        
+    }
+    
+    func keyBoardWillHide(notification: NSNotification) {
+        
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        
+        let userInfo = notification.userInfo
+        
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        
+        return keyboardSize.cgRectValue.height
     }
     
     
@@ -136,6 +190,15 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
             
             dismiss(animated: true, completion: nil)
             
+        }
+            
+        else if ((photo == nil)||(textField == nil )){
+            
+            print("No Photo or textField")
+            
+            navigationController?.popViewController(animated: true)
+            
+            dismiss(animated: true, completion: nil)
         }
     
         else {

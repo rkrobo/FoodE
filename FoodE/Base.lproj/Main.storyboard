@@ -253,7 +253,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkN-Wo-Jff">
                                         <rect key="frame" x="0.0" y="450" width="375" height="217"/>
                                         <color key="backgroundColor" red="0.84985286645938696" green="0.83046945237462266" blue="0.71494628062164667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" title="Take Photos"/>
+                                        <state key="normal" title="My Photo Gallery"/>
                                         <connections>
                                             <segue destination="SQg-zr-Dco" kind="show" id="Uc7-vS-NiL"/>
                                         </connections>
@@ -412,6 +412,39 @@
             </objects>
             <point key="canvasLocation" x="216.80000000000001" y="938.68065967016503"/>
         </scene>
+        <!--My Photo-->
+        <scene sceneID="xMb-iB-UJg">
+            <objects>
+                <viewController storyboardIdentifier="MyPhoto" id="XoK-t5-58s" customClass="MyPhoto" customModule="FoodE" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z6c-lV-Jqx"/>
+                        <viewControllerLayoutGuide type="bottom" id="dXq-aX-sMF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7qj-72-uQo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fsB-OP-AZC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dXq-aX-sMF" firstAttribute="top" secondItem="fsB-OP-AZC" secondAttribute="bottom" id="8hV-4Y-57S"/>
+                            <constraint firstItem="fsB-OP-AZC" firstAttribute="top" secondItem="Z6c-lV-Jqx" secondAttribute="bottom" id="DaD-BO-gOJ"/>
+                            <constraint firstItem="fsB-OP-AZC" firstAttribute="leading" secondItem="7qj-72-uQo" secondAttribute="leading" id="HbI-mi-3T9"/>
+                            <constraint firstAttribute="trailing" secondItem="fsB-OP-AZC" secondAttribute="trailing" id="PnV-Ai-Yq7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="UMz-td-zl3"/>
+                    <connections>
+                        <outlet property="imageView" destination="fsB-OP-AZC" id="MLf-9R-Hjh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MEq-Su-Jww" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1038" y="1639"/>
+        </scene>
         <!--Photo View Controller-->
         <scene sceneID="bCA-Iv-LMp">
             <objects>
@@ -503,6 +536,7 @@
                         <outlet property="livePhotoView" destination="Aob-vz-lom" id="GSF-Pv-4Nl"/>
                         <outlet property="photoPreview" destination="umX-Hb-2AQ" id="EWA-2B-wrv"/>
                         <outlet property="restaurantInput" destination="v2j-7f-UHF" id="A0Z-px-sdE"/>
+                        <outlet property="textField" destination="v2j-7f-UHF" id="yYr-Op-hoG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWZ-EQ-Sb5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -514,7 +548,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z9E-lf-m3b" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="40H-w1-gv1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="40H-w1-gv1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -532,7 +566,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SQg-zr-Dco" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uRv-7Q-I1k">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uRv-7Q-I1k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -550,7 +584,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ICE-xf-zlk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LG8-sd-yLh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LG8-sd-yLh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -562,6 +596,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSO-ye-yk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1012" y="938.68065967016503"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jW4-ZQ-5Hx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vTq-TM-pK5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="03L-Kh-yXi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XoK-t5-58s" kind="relationship" relationship="rootViewController" id="rcg-e1-7UL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4iy-vp-idk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="217" y="1639"/>
         </scene>
     </scenes>
     <resources>

@@ -155,7 +155,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         return 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    /*func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let photo = fetchRequest.object(at: indexPath) as! UserPhotos
         let alert = UIAlertController(title: "Delete Photo", message: "Do you want to delete this photo?", preferredStyle: .alert)
@@ -169,6 +169,22 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
             CoreDataStack.sharedInstance().save()
         }))
         present(alert, animated: true, completion: nil)
+    }*/
+    
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let photoController = self.storyboard!.instantiateViewController(withIdentifier: "MyPhoto") as! MyPhoto
+    
+    let photo = fetchRequest.object(at: indexPath as IndexPath) as! UserPhotos
+    
+    DispatchQueue.main.async(execute: {
+        if(photo.imageData != nil ){
+            photoController.image = UIImage(data: photo.imageData! as Data)!
+        }
+    })
+    
+        self.navigationController!.pushViewController(photoController, animated: true)
+        
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
