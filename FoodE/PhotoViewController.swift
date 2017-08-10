@@ -34,6 +34,8 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
        
         
         super.viewDidLoad()
+        
+        self.hideKeyboardWhenTappedAround()
     
             if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
                 
@@ -113,7 +115,7 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_textField: UITextField) -> Bool {
         
         textField.resignFirstResponder();
         
@@ -197,13 +199,11 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
         else if ((photo == nil)||(textField.text == "" )){
             
             let alert = UIAlertController(title: "Alert", message: "No Photo or Restaurant Name was entered. Please enter the restaurant name first and retake the photo. ", preferredStyle: UIAlertControllerStyle.alert)
+           
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             
             self.present(alert, animated: true, completion: nil)
             
-            navigationController?.popViewController(animated: true)
-            
-            dismiss(animated: true, completion: nil)
         }
     
         else {

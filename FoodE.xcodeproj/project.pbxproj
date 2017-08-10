@@ -69,7 +69,7 @@
 		A49891661E7E6048003270C3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A498916B1E7E6048003270C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A498916E1E7E6048003270C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A49891701E7E6048003270C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A49891701E7E6048003270C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = FoodE/Info.plist; sourceTree = "<group>"; };
 		A49891751E7E6048003270C3 /* FoodETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49891791E7E6048003270C3 /* FoodETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodETests.swift; sourceTree = "<group>"; };
 		A498917B1E7E6048003270C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +121,7 @@
 				A413B31F1EB61C800071A7BF /* UserPhotos+CoreDataProperties.swift */,
 				A40F5F861E9CB39E005621B9 /* Photos.swift */,
 				A4C025061E8DD164009AF88C /* Model.xcdatamodeld */,
+				A49891701E7E6048003270C3 /* Info.plist */,
 				A4C0250F1E8DD78E009AF88C /* LocationFood+CoreDataProperties.swift */,
 				A4B349511E8C6D960003F1CE /* LocationFood.swift */,
 				A49891631E7E6048003270C3 /* FoodE */,
@@ -159,7 +160,6 @@
 				A43F48201F3AF9A800010484 /* MyPhoto.swift */,
 				A498916B1E7E6048003270C3 /* Assets.xcassets */,
 				A498916D1E7E6048003270C3 /* LaunchScreen.storyboard */,
-				A49891701E7E6048003270C3 /* Info.plist */,
 			);
 			path = FoodE;
 			sourceTree = "<group>";
