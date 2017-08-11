@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MyPhoto: UIViewController{
+class MyPhotoDetailViewController: UIViewController{
     
     @IBOutlet weak var imageView: UIImageView!
     

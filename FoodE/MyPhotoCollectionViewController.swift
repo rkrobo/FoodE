@@ -181,7 +181,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     
         else {
         
-            let photoController = self.storyboard!.instantiateViewController(withIdentifier: "MyPhoto") as! MyPhoto
+            let photoController = self.storyboard!.instantiateViewController(withIdentifier: "MyPhoto") as! MyPhotoDetailViewController
     
             let photo = fetchRequest.object(at: indexPath as IndexPath) as! UserPhotos
     

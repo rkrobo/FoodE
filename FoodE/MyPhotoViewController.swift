@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import CoreData
 
-class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIImagePickerControllerDelegate{
+class MyPhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIImagePickerControllerDelegate,UITextFieldDelegate{
 
     @IBOutlet weak var livePhotoView: UIView!
     @IBOutlet weak var photoPreview: UIImageView!
@@ -31,9 +31,10 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
-       
         
         super.viewDidLoad()
+        
+        textField.delegate = self
         
         self.hideKeyboardWhenTappedAround()
     
@@ -114,12 +115,9 @@ class PhotoViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIIm
     }
     
     
-    
-    func textFieldShouldReturn(_textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder();
-        
-        return true
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
     }
     
     
