@@ -13,7 +13,12 @@ class MyPhotoDetailViewController: UIViewController{
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var restaurantName: UILabel!
+    
+    
     var image = UIImage()
+    
+    var restaurantNameText = String()
     
     
     override func viewDidLoad() {
@@ -26,8 +31,9 @@ class MyPhotoDetailViewController: UIViewController{
         
         super.viewWillAppear(animated)
         
-       imageView.image = image
+        imageView.image = image
         
+        restaurantName.text=restaurantNameText
         
     }
     

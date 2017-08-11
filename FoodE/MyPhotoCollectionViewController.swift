@@ -188,6 +188,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
             DispatchQueue.main.async(execute: {
                 if(photo.imageData != nil ){
                     photoController.image = UIImage(data: photo.imageData! as Data)!
+                    photoController.restaurantNameText = photo.restaurantName!
                 }
             })
             
