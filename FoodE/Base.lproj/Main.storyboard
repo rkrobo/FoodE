@@ -190,6 +190,7 @@
                                     <action selector="performSegueToReturnBack" destination="4Dy-Rn-zSv" eventType="touchUpInside" id="6SW-RI-5KA"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" red="0.084986237046632107" green="0.084986237046632107" blue="0.084986237046632107" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -224,35 +225,29 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="1YU-hZ-0bm"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="highlightedColor" red="0.27631861311166395" green="0.2738811471097819" blue="0.24617651426966522" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rL-Bl-GgW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79m-i4-uCA">
                                         <rect key="frame" x="0.0" y="250" width="414" height="200"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79m-i4-uCA">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
-                                                <color key="backgroundColor" red="0.99176955223083496" green="0.95492053031921387" blue="0.7921563982963562" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="J0y-Fs-0eR"/>
-                                                    <constraint firstAttribute="height" constant="200" id="jxI-0L-p3Z"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="Restuarant Photos">
-                                                    <color key="titleColor" red="0.20527040155440412" green="0.20527040155440412" blue="0.20527040155440412" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="Z9E-lf-m3b" kind="show" id="4Fo-8O-em6"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" red="0.99176955223083496" green="0.95492053031921387" blue="0.7921563982963562" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="jxI-0L-p3Z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Restuarant Photos">
+                                            <color key="titleColor" red="0.20527040155440412" green="0.20527040155440412" blue="0.20527040155440412" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Z9E-lf-m3b" kind="show" id="4Fo-8O-em6"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkN-Wo-Jff">
                                         <rect key="frame" x="0.0" y="450" width="414" height="286"/>
                                         <color key="backgroundColor" red="1" green="0.42964678667254541" blue="0.52036748960531209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="My Photo Gallery">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
@@ -296,10 +291,12 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XIi-rS-A8a">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="42"/>
+                                                <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="Rur-Ps-KpV"/>
                                                     <constraint firstAttribute="width" constant="50" id="avQ-9h-XSe"/>
                                                 </constraints>
+                                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Clear"/>
                                                 <connections>
                                                     <action selector="clearAction:" destination="hQG-rP-Dbb" eventType="touchUpInside" id="EAB-gN-Dki"/>
@@ -307,6 +304,7 @@
                                             </button>
                                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="avq-3b-cxN">
                                                 <rect key="frame" x="50" y="0.0" width="364" height="42"/>
+                                                <color key="backgroundColor" red="1" green="0.4094630252605812" blue="0.64117790935883046" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="10" constant="42" id="OzO-1O-759"/>
                                                 </constraints>
@@ -323,7 +321,7 @@
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSk-4r-ttI">
                                         <rect key="frame" x="0.0" y="42" width="414" height="30"/>
-                                        <color key="backgroundColor" red="0.79001376295336789" green="0.79001376295336789" blue="0.79001376295336789" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.56539840282579978" green="0.59634443689022676" blue="0.89691952720207258" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="1fX-qG-g9p"/>
                                         </constraints>
@@ -593,7 +591,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z9E-lf-m3b" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="40H-w1-gv1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="40H-w1-gv1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -611,7 +609,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SQg-zr-Dco" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uRv-7Q-I1k">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uRv-7Q-I1k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -629,7 +627,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ICE-xf-zlk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LG8-sd-yLh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LG8-sd-yLh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -647,7 +645,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vTq-TM-pK5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="03L-Kh-yXi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="03L-Kh-yXi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
