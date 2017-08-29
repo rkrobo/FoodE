@@ -144,14 +144,6 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Fjm-y4-6r6">
                                 <rect key="frame" x="345" y="665" width="20" height="20"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnJ-bP-Hqx">
-                                <rect key="frame" x="152" y="655" width="115" height="30"/>
-                                <color key="backgroundColor" red="0.8895320595854922" green="0.8895320595854922" blue="0.8895320595854922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Current Location"/>
-                                <connections>
-                                    <action selector="currentUserLocation:" destination="4Dy-Rn-zSv" eventType="touchUpInside" id="i6H-CL-TL1"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mty-hy-in6">
                                 <rect key="frame" x="306" y="626" width="98" height="30"/>
                                 <color key="backgroundColor" red="0.93513196243523322" green="0.93513196243523322" blue="0.93513196243523322" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -160,16 +152,27 @@
                                     <action selector="googlePlaces:" destination="4Dy-Rn-zSv" eventType="touchUpInside" id="yyT-Am-CyY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnJ-bP-Hqx">
+                                <rect key="frame" x="120" y="611" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Xnu-AO-fVH"/>
+                                    <constraint firstAttribute="width" constant="45" id="a64-CA-MDK"/>
+                                </constraints>
+                                <state key="normal" image="currentLocation"/>
+                                <connections>
+                                    <action selector="currentUserLocation:" destination="4Dy-Rn-zSv" eventType="touchUpInside" id="i6H-CL-TL1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8cA-ad-NZG" firstAttribute="top" secondItem="bnJ-bP-Hqx" secondAttribute="bottom" constant="51" id="8Jt-ri-0jY"/>
+                            <constraint firstItem="8cA-ad-NZG" firstAttribute="top" secondItem="bnJ-bP-Hqx" secondAttribute="bottom" constant="80" id="8Jt-ri-0jY"/>
                             <constraint firstItem="gUw-7s-gOp" firstAttribute="leading" secondItem="g0O-Ob-kAh" secondAttribute="leading" id="KSz-JW-B6S"/>
                             <constraint firstItem="Fjm-y4-6r6" firstAttribute="top" secondItem="mty-hy-in6" secondAttribute="bottom" constant="9" id="VeK-dV-xHP"/>
                             <constraint firstItem="gUw-7s-gOp" firstAttribute="bottom" secondItem="8cA-ad-NZG" secondAttribute="top" id="YXl-qX-5kC"/>
                             <constraint firstAttribute="trailing" secondItem="gUw-7s-gOp" secondAttribute="trailing" id="cGt-Gd-g3u"/>
                             <constraint firstItem="Fjm-y4-6r6" firstAttribute="centerX" secondItem="mty-hy-in6" secondAttribute="centerX" id="iwp-xM-fxk"/>
-                            <constraint firstItem="mty-hy-in6" firstAttribute="leading" secondItem="bnJ-bP-Hqx" secondAttribute="trailing" constant="39" id="joz-bY-Vwh"/>
+                            <constraint firstItem="mty-hy-in6" firstAttribute="leading" secondItem="bnJ-bP-Hqx" secondAttribute="trailing" constant="141" id="joz-bY-Vwh"/>
                             <constraint firstItem="8cA-ad-NZG" firstAttribute="top" secondItem="mty-hy-in6" secondAttribute="bottom" constant="80" id="siW-AT-YdA"/>
                             <constraint firstItem="gUw-7s-gOp" firstAttribute="top" secondItem="T0H-nC-BLy" secondAttribute="bottom" id="tgp-ED-E4o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mty-hy-in6" secondAttribute="trailing" constant="-10" id="wqs-yk-1BT"/>
@@ -202,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khf-53-ZnQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1301.5999999999999" y="45.42728635682159"/>
+            <point key="canvasLocation" x="1301.449275362319" y="44.836956521739133"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CO6-u9-5Lr">
@@ -663,5 +666,6 @@
     </scenes>
     <resources>
         <image name="cameraIcon" width="92" height="92"/>
+        <image name="currentLocation" width="64" height="64"/>
     </resources>
 </document>

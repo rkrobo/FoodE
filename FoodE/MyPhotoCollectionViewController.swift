@@ -26,7 +26,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     var itemsPerRow: CGFloat = 2
-    var sectionInsets = UIEdgeInsets(top: 6.0, left:3.8, bottom: 6.0, right: 3.8)
+    var sectionInsets = UIEdgeInsets(top: 8.0, left:3.8, bottom: 8.0, right: 3.8)
     var selectedIndexes   = [IndexPath]()
     var insertedIndexPaths: [IndexPath]!
     var deletedIndexPaths : [IndexPath]!
@@ -47,14 +47,13 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         searchBar.delegate = self
         
-       /* let imageName = "dinnerIcon.png"
+        /*let imageName = "dinnerIcon.png"
         let image = UIImage(named: imageName)
         let userData = UIImagePNGRepresentation(image!) as NSData?
         let userPhoto = UserPhotos(context: self.sharedContext)
-        
         userPhoto.imageData = userData
-        userPhoto.restaurantName="test"
-        */
+        userPhoto.restaurantName="test"*/
+        
         
         self.hideKeyboardWhenTappedAround()
         
