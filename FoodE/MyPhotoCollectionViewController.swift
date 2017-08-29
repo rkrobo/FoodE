@@ -14,6 +14,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     
     var searchTerm : String = ""
     
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var downloadIndicator: UIActivityIndicatorView!
@@ -24,8 +25,8 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var itemsPerRow: CGFloat = 3
-    var sectionInsets = UIEdgeInsets(top: 6.0, left: 5.3, bottom: 6.0, right: 5.3)
+    var itemsPerRow: CGFloat = 2
+    var sectionInsets = UIEdgeInsets(top: 6.0, left:3.8, bottom: 6.0, right: 3.8)
     var selectedIndexes   = [IndexPath]()
     var insertedIndexPaths: [IndexPath]!
     var deletedIndexPaths : [IndexPath]!
@@ -45,6 +46,15 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         super.viewDidLoad()
         
         searchBar.delegate = self
+        
+       /* let imageName = "dinnerIcon.png"
+        let image = UIImage(named: imageName)
+        let userData = UIImagePNGRepresentation(image!) as NSData?
+        let userPhoto = UserPhotos(context: self.sharedContext)
+        
+        userPhoto.imageData = userData
+        userPhoto.restaurantName="test"
+        */
         
         self.hideKeyboardWhenTappedAround()
         
@@ -127,6 +137,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
             let currentSection = sections[section]
             return currentSection.numberOfObjects
         }
+        
         return 0
     }
     
@@ -140,6 +151,7 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         DispatchQueue.main.async(execute: {
             if(photo.imageData != nil ){
+                cell.restaurantNameLabel.backgroundColor = self.randomColor()
                 cell.imageCell.image = UIImage(data: photo.imageData! as Data)
                 cell.restaurantNameLabel.text = photo.restaurantName
             }
@@ -156,6 +168,14 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         }
         
         return 0
+    }
+    
+    
+    func randomColor() -> UIColor {
+        return UIColor(red:   .random(),
+                       green: .random(),
+                       blue:  .random(),
+                       alpha: 1.0)
     }
     
     
@@ -289,4 +309,10 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
             return sectionInsets.left
         }
 
+}
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
 }
