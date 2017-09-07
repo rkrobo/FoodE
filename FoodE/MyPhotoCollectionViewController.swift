@@ -13,6 +13,12 @@ import Foundation
 class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate{
     
     var searchTerm : String = ""
+    var gridLayout = GridViewLayout()
+    var listLayout = ListViewLayout()
+    
+    @IBOutlet weak var listLayoutButton: UIButton!
+    
+    @IBOutlet weak var gridLayoutButton: UIButton!
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -45,14 +51,16 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         super.viewDidLoad()
         
+        setupInitialLayout()
+        
         searchBar.delegate = self
         
-        /*let imageName = "dinnerIcon.png"
+        let imageName = "dinnerIcon.png"
         let image = UIImage(named: imageName)
         let userData = UIImagePNGRepresentation(image!) as NSData?
         let userPhoto = UserPhotos(context: self.sharedContext)
         userPhoto.imageData = userData
-        userPhoto.restaurantName="test"*/
+        userPhoto.restaurantName="test"
         
         
         self.hideKeyboardWhenTappedAround()
@@ -63,6 +71,31 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
     }
     
+    
+    @IBAction func gridLayoutAction(_ sender: Any) {
+        
+        UIView.animate(withDuration: 0.2) { () -> Void in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.setCollectionViewLayout(self.gridLayout, animated: true)
+        }
+        
+        
+    }
+    
+    @IBAction func listLayoutAction(_ sender: Any) {
+        
+        UIView.animate(withDuration: 0.2) { () -> Void in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.setCollectionViewLayout(self.listLayout, animated: true)
+        }
+    }
+    
+    
+    
+    func setupInitialLayout() {
+        
+        collectionView.collectionViewLayout = gridLayout
+    }
     
     func fetchRestuarants() -> NSFetchedResultsController<NSFetchRequestResult>{
         
@@ -293,21 +326,6 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         dismiss(animated: true, completion: nil)
         
     }
-}
-    extension MyPhotoCollectionViewController : UICollectionViewDelegateFlowLayout {
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-            let availableWidth = view.frame.width - paddingSpace
-            let widthPerItem = availableWidth / itemsPerRow
-            return CGSize(width: widthPerItem, height: widthPerItem)
-        }
-        
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt: Int) -> CGFloat{
-            return sectionInsets.left
-        }
-
 }
 
 extension CGFloat {

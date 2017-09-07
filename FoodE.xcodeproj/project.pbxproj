@@ -14,6 +14,8 @@
 		A41058191EB25DA7006575E6 /* MyPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41058181EB25DA7006575E6 /* MyPhotoViewController.swift */; };
 		A413B3201EB61C800071A7BF /* UserPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413B31E1EB61C800071A7BF /* UserPhotos.swift */; };
 		A413B3211EB61C800071A7BF /* UserPhotos+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413B31F1EB61C800071A7BF /* UserPhotos+CoreDataProperties.swift */; };
+		A4194BA41F61416E003673A7 /* GridViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4194BA31F61416E003673A7 /* GridViewLayout.swift */; };
+		A4194BA61F615B3F003673A7 /* ListViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4194BA51F615B3F003673A7 /* ListViewLayout.swift */; };
 		A41DC2031E8DC06500A9523C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41DC2021E8DC06500A9523C /* CollectionViewCell.swift */; };
 		A41E19651E9A15B000C23119 /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41E19641E9A15B000C23119 /* FlickrClient.swift */; };
 		A4365D9D1ECA8D0F0045ECFF /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = A498916B1E7E6048003270C3 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		A41058181EB25DA7006575E6 /* MyPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoViewController.swift; sourceTree = "<group>"; };
 		A413B31E1EB61C800071A7BF /* UserPhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotos.swift; sourceTree = "<group>"; };
 		A413B31F1EB61C800071A7BF /* UserPhotos+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserPhotos+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A4194BA31F61416E003673A7 /* GridViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewLayout.swift; sourceTree = "<group>"; };
+		A4194BA51F615B3F003673A7 /* ListViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewLayout.swift; sourceTree = "<group>"; };
 		A41DC2021E8DC06500A9523C /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		A41E19641E9A15B000C23119 /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 		A4365D9F1ECA8D370045ECFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				A4365D9E1ECA8D370045ECFF /* Main.storyboard */,
 				A41058181EB25DA7006575E6 /* MyPhotoViewController.swift */,
 				A41058161EB25C79006575E6 /* MyPhotoCollectionViewController.swift */,
+				A4194BA31F61416E003673A7 /* GridViewLayout.swift */,
+				A4194BA51F615B3F003673A7 /* ListViewLayout.swift */,
 				A4DAC2A71EBA3CA900AD7DED /* MyPhotoCollectionViewCell.swift */,
 				A43F48201F3AF9A800010484 /* MyPhotoDetailViewController.swift */,
 				A498916B1E7E6048003270C3 /* Assets.xcassets */,
@@ -338,6 +344,7 @@
 			files = (
 				A43792901F308A7E00324729 /* UserRegion.swift in Sources */,
 				A43792911F308A7E00324729 /* UserRegion+CoreDataProperties.swift in Sources */,
+				A4194BA61F615B3F003673A7 /* ListViewLayout.swift in Sources */,
 				A4365D9D1ECA8D0F0045ECFF /* Assets.xcassets in Sources */,
 				A4C025131E8DD89D009AF88C /* Model.xcdatamodeld in Sources */,
 				A40F5F891E9CB39E005621B9 /* Photos+CoreDataProperties.swift in Sources */,
@@ -350,6 +357,7 @@
 				A4C025111E8DD78E009AF88C /* LocationFood+CoreDataProperties.swift in Sources */,
 				A40F5F881E9CB39E005621B9 /* Photos.swift in Sources */,
 				A43F48211F3AF9A800010484 /* MyPhotoDetailViewController.swift in Sources */,
+				A4194BA41F61416E003673A7 /* GridViewLayout.swift in Sources */,
 				A4DAC2A81EBA3CA900AD7DED /* MyPhotoCollectionViewCell.swift in Sources */,
 				A49891671E7E6048003270C3 /* MapViewController.swift in Sources */,
 				A413B3211EB61C800071A7BF /* UserPhotos+CoreDataProperties.swift in Sources */,
