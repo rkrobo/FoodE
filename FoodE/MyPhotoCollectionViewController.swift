@@ -55,12 +55,12 @@ class MyPhotoCollectionViewController: UIViewController, UICollectionViewDelegat
         
         searchBar.delegate = self
         
-        let imageName = "dinnerIcon.png"
+        /*let imageName = "dinnerIcon.png"
         let image = UIImage(named: imageName)
         let userData = UIImagePNGRepresentation(image!) as NSData?
         let userPhoto = UserPhotos(context: self.sharedContext)
         userPhoto.imageData = userData
-        userPhoto.restaurantName="test"
+        userPhoto.restaurantName="test"*/
         
         
         self.hideKeyboardWhenTappedAround()
